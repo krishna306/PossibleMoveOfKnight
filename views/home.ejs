@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Grape+Nuts&display=swap" rel="stylesheet">
+    <title>Knight Possible Move</title>
+</head>
+<body>
+    <div class="text">
+        <h2>Position of Knight </h2>
+        <div class="red">
+        </div>
+    </div>
+    <div class="text">
+        <h2>All the possible places where the Knight can move</h2>
+        <div class="pink">
+        </div>
+    </div>
+    <div class="container">
+        <table class="output">
+            <% for(var i=0; i < 8; i++) { %>
+               <tr>
+                <% for(var j=0;j< 8; j++) { %>
+                    <% if((i+j)%2 == 0){ var putId = "curr"+i+j %>
+                        <td  class="white" id="<%= putId %>" onclick="changeColor('<%= i %>','<%= j %>');"></td>
+                    <% } else{ var putId = "curr"+i+j %>
+                        <td  class="black" id="<%= putId %>" onclick="changeColor('<%= i %>','<%= j %>');"></td>
+                    <% } %>
+                <% } %>
+               </tr>
+            <% } %>
+        </table>    
+    </div>
+    <div class="Btn">
+        <button class="btn" onclick="Reset()">Reset</button>
+    </div>
+</body>
+    <script>
+        function changeColor(X,Y){
+            var x = +X;
+            var y = +Y;
+            var v = "curr"+x+y;
+            var element = document.getElementById(v);
+            element.style.backgroundColor = "red";
+            UpdateColor(x + 1, y + 2);
+            UpdateColor(x + 2, y + 1);
+            UpdateColor(x + 2, y - 1);
+            UpdateColor(x + 1, y - 2);
+            UpdateColor(x - 1, y - 2);
+            UpdateColor(x - 2, y - 1);
+            UpdateColor(x - 2, y + 1);
+            UpdateColor(x - 1, y + 2);
+        }
+        function UpdateColor(x,y){
+            if(validate(x,y)){
+                var v = "curr"+x+y;
+                var element = document.getElementById(v);
+                element.style.backgroundColor = "rgb(198, 12, 236)";
+            }
+        }
+        function validate(x,y){
+            if((x>=0 && x<8) && (y>=0 && y<8)){
+                return true;
+            }
+            return false;
+        }
+        function Reset(){
+            window.location.href ="/";
+        }
+    </script>
+</html>
